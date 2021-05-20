@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.team.NewLearn.mapper.cart.CartMapper">
+
+    <!-- 카트 리스트 select -->
+    <select id="selectCartList" resultType="com.team.NewLearn.dto.cart.CartDTO">
+        SELECT cartId,userId,l.lectureId,title,price
+        FROM cart c
+                 inner join lecture l on c.lectureId=l.lectureId
+        where c.userId=#{userId}
+    </select>
+
+    <!-- 카트 모두 삭제 -->
+    <delete id="deleteCartAll" parameterType="java.lang.String">
+        DELETE FROM cart WHERE userId = #{userId}
+    </delete>
+    
+    <!-- 카트 부분 삭제 -->
+    <delete id="deleteCart" parameterType="com.team.NewLearn.dto.cart.CartDTO">
+        DELETE FROM cart WHERE cartId = #{cartId} and userId = #{userId}
+    </delete>
+
+</mapper>
+
+
