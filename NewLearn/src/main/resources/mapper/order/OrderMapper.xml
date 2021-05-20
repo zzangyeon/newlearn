@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.team.NewLearn.mapper.order.OrderMapper">
+
+
+
+    <insert id="insertOrder" parameterType="orderDTO">
+        INSERT INTO order_tb(orderId, userId, lectureId, nameId , tel, email)
+        SELECT #{orderId}, userId, lectureId, #{nameId}, #{tel}, #{email}
+        FROM cart WHERE userId=#{userId};
+    </insert>
+
+
+
+
+</mapper>
+
+
+
+
+
+
+

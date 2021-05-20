@@ -1,0 +1,32 @@
+<div th:replace="/layout/header.html :: header"></div>
+
+        <h1 class="mt-4">회원 명부</h1>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">e-mail</th>
+                <th scope="col">Name</th>
+                <th scope="col">Role</th>
+                <th scope="col">passwordLock</th>
+                <th scope="col">regDate</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="dto : ${result}" th:onclick="|location.href='@{/mypage/detail/{memberId}(memberId=${dto.memberId})}'|">
+                <td> <a class="move" th:text="${dto.memberId}"scope="row" ></a></td>
+                <td th:text="${dto.email}"></td>
+                <td th:text="${dto.name}"></td>
+                <td th:text="${dto.role}"></td>
+                <td th:text="${dto.passwordLock}"></td>
+                <td th:text="${dto.regDate}"></td>
+            </tr>
+            </tbody>
+          </table>
+
+
+
+
+<div th:replace="/layout/footer.html :: footer"></div>
