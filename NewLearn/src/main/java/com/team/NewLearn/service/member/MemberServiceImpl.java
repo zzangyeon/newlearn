@@ -37,26 +37,37 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberDTO selectDetailMember(int memberId) {
+    public MemberDTO selectDetailMember(int id) {
         log.info("여기는 select detail member  서비스 단!!!");
-        return boardMemberMapper.selectDetailMember(memberId);
+        return boardMemberMapper.selectDetailMember(id);
     }
 
     @Override
     public int memberUpdate(MemberDTO memberDTO) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        memberDTO.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
-
-        log.info("여기는 update 서비스 단!!!! ");
+        if(memberDTO.getPassword().equals("")){
+            memberDTO.setPassword("");
+            log.info("::::::: 비밀번호 수정은 없다 :::::");
+            return boardMemberMapper.memberUpdate(memberDTO);
+        }else{
+            memberDTO.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
+        log.info("::::::: 비밀번호 수정한다 :::::");
         return boardMemberMapper.memberUpdate(memberDTO);
+
+        }
     }
 
     @Override
-    public int memberDelete(int memberId) {
+    public int memberDelete(int id) {
         log.info("여기는 memberDelete  서비스 단!!!! ");
-        return boardMemberMapper.memberDelete(memberId);
+        return boardMemberMapper.memberDelete(id);
     }
 
+    @Override
+    public int selectMemberId(String email) {
+        log.info("여기는 selectIdMember  서비스 단!!!! ");
+        return boardMemberMapper.selectMemberId(email);
+    }
 
 }

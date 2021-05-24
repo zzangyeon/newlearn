@@ -1,6 +1,7 @@
 package com.team.NewLearn.mapper.cart;
 
 import com.team.NewLearn.dto.cart.CartDTO;
+import com.team.NewLearn.dto.cart.CartList;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -9,11 +10,11 @@ import java.util.List;
 public interface CartMapper {
 
     //장바구니 리스트 찾기(회원ID)
-    public List<CartDTO> selectCartList(String userId);
+    public List<CartList> selectCartList(int memberId);
 
-   // 카트 전체 삭제
-    public void deleteCartAll(String userId);
+    // 카트 전체 삭제
+    public void deleteCartAll(int memberId);
 
     //카트 부분 삭제
-    public void deleteCart(CartDTO cartDTO);
+    public int deleteCart(CartDTO cart);
 }

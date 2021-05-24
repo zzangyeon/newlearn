@@ -5,12 +5,12 @@
                 <input type="submit" th:value="목록" th:formaction="@{/mypage/select}">
             </div>
             <div class="btn_wrap text-left">
-                <input type="submit" th:value="수정" th:formaction="@{/mypage/update/{memberId}(memberId=${detail.memberId})}">
+                <input type="submit" th:value="수정" th:formaction="@{/mypage/update/{id}(id=${detail.id})}">
             </div>
         </form>
         <form role="form" th:object=${detail}  method="post">
             <div class="btn_wrap text-left">
-                <input type="submit" th:value="삭제" th:formaction="@{/mypage/delete/{memberId}(memberId=${detail.memberId})}">
+                <input type="submit" th:value="삭제" th:formaction="@{/mypage/delete/{id}(id=${detail.id})}">
             </div>
         </form>
 
@@ -32,7 +32,7 @@
             <tbody>
 
             <tr th:object=${detail} >
-                <td th:text="${detail.memberId}"scope="row"></td>
+                <td th:text="${detail.id}"scope="row"></td>
                 <td th:text="${detail.email}"></td>
                 <td th:text="${detail.password}"></td>
                 <td th:text="${detail.name}"></td>

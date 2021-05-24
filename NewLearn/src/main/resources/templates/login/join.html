@@ -23,33 +23,6 @@
 <div class="container">
     <h3>회원가입 폼 입니다.</h3>.
 
-<!--
-    <form role="form" th:object=${memberDTO} th:action="@{/sign-Up}"
-          method="post" enctype="multipart/form-data">
-        <div>
-            <label for="email" style="font-weight: bolder;">email</label>
-            <input type="text" th:field="*{email}" id="email" name="email"
-                   placeholder="email 입력하세요" required="required">
-        </div>
-        <div>
-            <label for="password" style="font-weight: bolder;">password</label>
-            <input type="password" th:field="*{password}" id="password" name="password"
-                   placeholder="password 입력하세요" required="required">
-        </div>
-        <div>
-            <label for="name" style="font-weight: bolder;">name</label>
-            <input type="text" th:field="*{name}" id="name" name="name"
-                   placeholder="제목을 입력하세요" required="required">
-        </div>
-
-        <div style="text-align: right;">
-            <input type="submit" th:value="목록" th:formaction="@{/}">
-            <input type="submit" th:value="작성" >
-            <input type="reset" th:value="취소" th:formaction="@{/}" >
-        </div>
-    </form>-->
-
-
     <form role="form" th:object=${memberDTO} th:action="@{/sign-Up}" method="post" id="myForm">
         <div class="form-group has-feedback">
             <label class="control-label" for="email">이메일</label>

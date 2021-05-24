@@ -17,14 +17,14 @@ import java.util.Date;
 @Alias("memberDTO")
 public class MemberDTO implements UserDetails {
 
-    private int memberId;
+    private int id;
     private String email;
     private String password;
     private String name;
     private String role;
     private int passwordLock;
     private String regDate;
-    private String status;
+    private String state;
 
 
     /*UserDetails 기본 상속 변수 */

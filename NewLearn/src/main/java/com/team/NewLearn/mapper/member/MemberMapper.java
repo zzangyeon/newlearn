@@ -20,14 +20,16 @@ public interface MemberMapper {
     //전체 글 갯수 조회
     int getTotal();
     // 회원 상세 조회
-    MemberDTO selectDetailMember(int no);
+    MemberDTO selectDetailMember(int id);
     //회원 수정
     int memberUpdate(MemberDTO memberDTO);
     // 회원 삭제
-    int memberDelete(int no);
-    // 동적검색 테스트
-    List<MemberDTO> searchTest(Map<String, Map<String, String>> map);
+    int memberDelete(int id);
+    // 동적검색
+    List<MemberDTO> searchMember(Map<String, Map<String, String>> map);
 
+    //회원 id email로 찾기
+    int selectMemberId(String email);
 
 
 }

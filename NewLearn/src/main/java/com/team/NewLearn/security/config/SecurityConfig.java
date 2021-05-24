@@ -2,7 +2,7 @@ package com.team.NewLearn.security.config;
 
 import com.team.NewLearn.security.handler.AuthFailureHandler;
 import com.team.NewLearn.security.handler.AuthSuccessHandler;
-import com.team.NewLearn.service.security.SecurityServiceImpl;
+import com.team.NewLearn.service.login.SecurityServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,8 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
@@ -69,6 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/login/**",
                         "/oauth/**",
                         "/oauth2/**",
+                        "/community/**",
                         "/main",
                         "/logout"
 

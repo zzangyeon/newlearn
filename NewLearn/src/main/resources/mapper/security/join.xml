@@ -7,7 +7,7 @@
     <insert id="memberSignUp" parameterType="memberDTO">
         /*회원 가입*/
 
-        insert into memberlist (email, password, name) value (
+        insert into member (email, password, name) value (
             #{email}
             ,#{password}
             ,#{name}

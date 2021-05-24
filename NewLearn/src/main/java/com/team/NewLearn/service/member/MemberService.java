@@ -17,13 +17,18 @@ public interface MemberService {
     int getTotal();
 
     // 회원 상세 조회
-    MemberDTO selectDetailMember(int memberId);
+    MemberDTO selectDetailMember(int id);
 
     //회원 수정
     int memberUpdate(MemberDTO memberDTO);
 
     // 회원 삭제
-    int memberDelete(int memberId);
+    int memberDelete(int id);
+
+
+    //회원 email로 id 찾기
+    int selectMemberId(String email);
+
 
 
 

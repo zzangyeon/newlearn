@@ -3,8 +3,11 @@ package com.team.NewLearn.controller.order;
 import com.team.NewLearn.dto.order.OrderDTO;
 import com.team.NewLearn.service.cart.CartService;
 
+import com.team.NewLearn.service.member.MemberService;
 import com.team.NewLearn.service.order.OrderService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,31 +19,28 @@ import java.util.Calendar;
 @Controller
 @RequestMapping("/order")
 @RequiredArgsConstructor
+@Log4j2
 public class OrderController {
 
-    String userId = "orange";
+    private String email = "";
+    private int memberId;
     private final OrderService orderService;
     private final CartService cartService;
+    private final MemberService memberService;
 
     @GetMapping
-    public String insertOrder(@ModelAttribute OrderDTO orderDTO){
+    public String insertOrder(@ModelAttribute OrderDTO orderDTO, Authentication auth){
 
-        //orderId = 년월일_난수
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
-        String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
-        String subNum = "";
+        // 로그인한 정보 중 이름을 불러온다.
+        this.email = auth.getName().toString();
+        //email로 memberId 찾기.
+        memberId = memberService.selectMemberId(email);
+        log.info(auth.getDetails());
+        System.out.println(memberId);
 
-        for(int i = 1; i <= 6; i ++) {
-            subNum += (int)(Math.random() * 10);
-        }
-        String orderId = ymd + "_" + subNum;
-
-        orderDTO.setUserId(userId);
-        orderDTO.setOrderId(orderId);
+        orderDTO.setMemberId(memberId);
         orderService.insertOrder(orderDTO);
-        cartService.deleteCartAll(userId);
-        return "redirect:/";
+        cartService.deleteCartAll(memberId);
+        return "redirect:/main";
     }
 }

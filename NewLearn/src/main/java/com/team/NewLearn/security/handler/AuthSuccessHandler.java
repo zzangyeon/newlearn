@@ -1,7 +1,7 @@
 package com.team.NewLearn.security.handler;
 
 import com.team.NewLearn.dto.login.LoginLogDTO;
-import com.team.NewLearn.service.security.SecurityService;
+import com.team.NewLearn.service.login.SecurityService;
 import com.team.NewLearn.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -56,7 +56,7 @@ public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
             loginLogDTO.setLoginIp(ip);
             loginLogDTO.setEmail(email);
-            loginLogDTO.setStatus("success");
+            loginLogDTO.setState("success");
             securityServiceMapper.AddLoginLog(loginLogDTO);
 
         } catch (Exception e) {

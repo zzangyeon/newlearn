@@ -1,18 +1,18 @@
 package com.team.NewLearn.service.cart;
 
 import com.team.NewLearn.dto.cart.CartDTO;
-import com.team.NewLearn.mapper.cart.CartMapper;
+import com.team.NewLearn.dto.cart.CartList;
 
 import java.util.List;
 
 public interface CartService {
 
 
-    List<CartDTO> getCartList(String userId);
+    List<CartList> getCartList(int memberId);
 
-    void deleteCartAll(String userId);
+    void deleteCartAll(int memberId);
 
 
-    void deleteCart(CartDTO cartDTO);
+    int deleteCart(CartDTO cartDTO);
 
 }

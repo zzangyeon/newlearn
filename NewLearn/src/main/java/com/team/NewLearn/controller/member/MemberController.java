@@ -27,43 +27,44 @@ public class MemberController {
     public String selectAllMember(Criteria cri, Model model, Authentication auth) {
         List<MemberDTO> memberDTOS = new ArrayList<>();
 
-        if (auth.getName().equals("admin")) {
+        if (auth.getAuthorities().toString().equals("[ROLE_ADMIN]")) {
 
             log.info("::::[ controller 관리자 ]:::: 전체회원 조회  :::::::::::: ");
 
             memberDTOS = memberService.selectAllMember(cri);
 
+            // 로그인 정보를 model에 넣어 뷰단에서 꺼내어 사용한다.
             model.addAttribute("auth", auth);
             model.addAttribute("result", memberDTOS);
             model.addAttribute("pageMaker", new PageDTO(cri, memberService.getTotal()));
 
             return "admin/memberList";
-        }
+        }else {
 
             memberDTOS = memberService.selectMember(auth.getName());
 
             model.addAttribute("result", memberDTOS);
             return "member/memberList";
-
+        }
     }
 
     // 회원 상세 조회
-    @GetMapping("/detail/{memberId}")
-    public String selectMemberDetail(@PathVariable int memberId, Model model) {
+    @GetMapping("/detail/{id}")
+    public String selectMemberDetail(@PathVariable int id, Model model) {
         log.info("::::::::::: 회원 상세조회  in controller ::::::::::::::");
 
 
-        model.addAttribute("detail", memberService.selectDetailMember(memberId));
+        model.addAttribute("detail", memberService.selectDetailMember(id));
         return "member/memberDetail";
     }
 
     // 회원 정보 수정
-    @GetMapping("/update/{memberId}")
-    public String updateMember(@PathVariable int memberId, Model model) {
+    @GetMapping("/update/{id}")
+    public String updateMember(@PathVariable int id, Model model) {
 
         log.info("::::::::::: 회원 정보 수정  in controller :::::::::::::::::");
 
-        model.addAttribute("update", memberService.selectDetailMember(memberId));
+        model.addAttribute("update", memberService.selectDetailMember(id));
 
         return "member/memberUpdate";
     }
@@ -73,20 +74,21 @@ public class MemberController {
     public String updateMember(@ModelAttribute MemberDTO memberDTO) {
 
         log.info("::::::::::: 회원 정보 수정 완료 in controller  :::::::::::::::::::");
-        memberService.memberUpdate(memberDTO);
-        String memberId = Long.toString(memberDTO.getMemberId());
 
-        return "redirect:/mypage/detail/" + memberId;
+        memberService.memberUpdate(memberDTO);
+        String id = Integer.toString(memberDTO.getId());
+
+        return "redirect:/mypage/detail/" +id ;
     }
 
     // 회원 탈퇴
-    @PostMapping("/delete/{memberId}")
-    public String deleteMember(@PathVariable int memberId) {
+    @PostMapping("/delete/{id}")
+    public String deleteMember(@PathVariable int id) {
 
         log.info("::::::::::: 회원 탈퇴 ::::::::::::::::::::::::");
-        memberService.memberDelete(memberId);
+        memberService.memberDelete(id);
 
-        return "redirect:/mypage/select";
+        return "redirect:/logout";
     }
 
 }

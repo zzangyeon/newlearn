@@ -21,26 +21,56 @@
     </sql>
 
 
-    <select id="searchTest" resultType="memberDTO">
+    <select id="searchMember" resultType="memberDTO">
 
-        select * from memberList
+        select
+               id as id,
+               email as email,
+               password as password,
+               name as name,
+               role as role,
+               passwordLock as passwordLock,
+               regDate as regDate,
+               state as state
+
+        from member
         <include refid="criteria"></include>
-        order by memberId desc
+        order by id desc
         limit #{pageStart},#{amount};
 
     </select>
 
 
     <select id="selectAllMember" resultType="memberDTO">
-        select * from memberList
+        select
+        id as id,
+        email as email,
+        password as password,
+        name as name,
+        role as role,
+        passwordLock as passwordLock,
+        regDate as regDate,
+        state as state
+
+        from member
 
         <include refid="criteria"></include>
-        order by memberId desc
-        limit #{pageStart},#{amount};
+        order by id desc
+        limit #{pageStart},#{amount}
+
     </select>
 
     <select id="selectMember" resultType="memberDTO">
-        select * from memberList
+        select
+            id as id,
+            email as email,
+            password as password,
+            name as name,
+            role as role,
+            passwordLock as passwordLock,
+            regDate as regDate,
+            state as state
+        from member
 
         where email = #{email}
 
@@ -49,33 +79,43 @@
 
     <select id="getTotal" resultType="int">
 
-        select count(memberId)
-        from memberList
+        select count(id) from member
 
     </select>
 
     <select id="selectDetailMember" resultType="memberDTO">
-        select *
-        from memberList
-        where memberId = #{memberId}
+        select
+            id as id,
+            email as email,
+            password as password,
+            name as name,
+            role as role,
+            passwordLock as passwordLock,
+            regDate as regDate,
+            state as state
+
+        from member
+        where id = #{id}
     </select>
 
     <delete id="memberDelete" parameterType="int">
         DELETE
-        FROM memberList
-        WHERE memberId = #{memberId}
+        FROM member
+        WHERE id = #{id}
     </delete>
 
-    <update id="memberUpdate" parameterType="memberDTO">
+    <update id="memberUpdate" parameterType="memberDTO" >
 
-        update memberList
-        set
-            name = #{name},
-            Password = #{password}
-
-        where memberId = #{memberId}
+        update member set
+            name =  #{name}
+        <if test='password != ""'> , Password = #{password}</if>
+        where id = #{id}
 
     </update>
+
+    <select id="selectMemberId" resultType="int">
+        select id from member where email=#{email}
+    </select>
 
 
 </mapper>

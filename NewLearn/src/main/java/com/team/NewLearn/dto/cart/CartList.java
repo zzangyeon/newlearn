@@ -1,20 +1,18 @@
 package com.team.NewLearn.dto.cart;
 
+import com.team.NewLearn.dto.lecture.LectureDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.ibatis.type.Alias;
-import org.springframework.stereotype.Component;
 
 @Data
-@Component
 @NoArgsConstructor
 @AllArgsConstructor
-@Alias("cartDTO")
-public class CartDTO {
+@Alias("CartList")
+public class CartList {
 
-    private int id;
-    private int memberId;
-    private int lectureId;
+    private CartDTO cart;
+    private LectureDTO lecture;
 
 }

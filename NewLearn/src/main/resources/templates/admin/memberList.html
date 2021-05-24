@@ -16,8 +16,8 @@
             </thead>
             <tbody>
 
-            <tr th:each="dto : ${result}" th:onclick="|location.href='@{/mypage/detail/{memberId}(memberId=${dto.memberId})}'|">
-                <td> <a class="move" th:text="${dto.memberId}"scope="row" ></a></td>
+            <tr th:each="dto : ${result}" th:onclick="|location.href='@{/mypage/detail/{id}(id=${dto.id})}'|">
+                <td> <a class="move" th:text="${dto.id}"scope="row" ></a></td>
                 <td th:text="${dto.email}"></td>
                 <td th:text="${dto.name}"></td>
                 <td th:text="${dto.role}"></td>
