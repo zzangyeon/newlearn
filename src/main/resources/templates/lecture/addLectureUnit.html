@@ -1,0 +1,13 @@
+<div th:replace="/layout/header.html :: header"></div>
+<link rel="stylesheet" type="text/css" th:href="@{/css/list.css}">
+
+
+<form method="post" th:action="@{/api/v1/upload/{id}(id=${id})}" enctype="multipart/form-data">
+    <input multiple type="file" name="files">
+    <input name="title" placeholder="강의 제목을 적어주세요">
+    <button>submit</button>
+</form>
+
+
+<div th:replace="/layout/footer.html :: footer"></div>
+

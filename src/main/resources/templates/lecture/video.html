@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" type="text/css" href="/css/reset.css">
+  <link rel="stylesheet" type="text/css" href="/css/video.css">
+</head>
+<body>
+
+    <div class="title">
+      <h2 th:text="${unit.title}"></h2>
+    </div>
+
+    <iframe th:height="450" th:src="@{${unit.url}}" th:frameborder="0"></iframe>
+
+    <div class="btn-bar">
+      <a th:href="@{/unit/{id}/{originId}(id=${unit.id},originId=${unit.id})}">이전 강의</a>
+      <a th:href="@{/unit/{id}/{originId}(id=${unit.id},originId=${unit.id})}">다음 강의</a>
+    </div>
+
+</body>
+</html>

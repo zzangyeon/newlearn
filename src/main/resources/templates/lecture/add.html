@@ -1,0 +1,63 @@
+<div th:replace="/layout/header.html :: header"></div>
+<link rel="stylesheet" type="text/css" th:href="@{/css/list.css}">
+
+<div class="content">
+    <div class="content">
+        <h2 class="page-title">강의 등록</h2>
+        <form role="form" th:object=${lectureDTO} th:action  method="post" enctype="multipart/form-data">
+            <div class="form-con">
+                <table>
+                    <colgroup>
+                        <col width="20%"/>
+                        <col width="80%"/>
+                    </colgroup>
+                    <tr>
+                        <th>강의 분류 - category ID를 직접 입력</th>
+                        <td><input type="text" th:field="*{categoryId}"></td>
+                    </tr>
+                    <tr>
+                        <th>강의 제목</th>
+                        <td><input type="text" th:field="*{title}"></td>
+                    </tr>
+                    <tr>
+                        <th>강의 설명</th>
+                        <td><textarea rows="6" th:field="*{content}"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th>강의 한줄 설명</th>
+                        <td><textarea rows="6" th:field="*{sContent}"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th>금액</th>
+                        <td><input type="text" th:field="*{price}"></td>
+                    </tr>
+                    <tr>
+                        <th>썸네일 파일첨부(임의 입력)</th>
+                        <td>
+                            <div th:class="uploadDiv">
+                                <input th:type="file" th:name="uploadFile" multiple>
+                            </div>
+                            <div th:class="uploadResult">
+                                <ul>
+                                    <!--업로드 이미지 들어가는 곳-->
+                                </ul>
+                            </div>
+                            <input type="button" th:id="uploadBtn" value="파일첨부">
+                        </td>
+                    </tr>
+                </table>
+                <input type="hidden" class="uuid" th:field="*{uuid}" value="">
+                <div class="btn-group">
+                    <input type="submit" class="wh_btn" th:value="취소" th:formaction="@{/}">
+                    <input type="submit" class="wh_btn" th:value="저장" th:formaction="@{/add}">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="/js/lectureAdd.js"></script>
+
+<div th:replace="/layout/footer.html :: footer"></div>
+
