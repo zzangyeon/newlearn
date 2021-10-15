@@ -24,6 +24,6 @@ public class MyAuthentication extends UsernamePasswordAuthenticationToken {
         super(email, password, grantedAuthorityList);
 
         this.memberDTO = member;
-
     }
+
 }

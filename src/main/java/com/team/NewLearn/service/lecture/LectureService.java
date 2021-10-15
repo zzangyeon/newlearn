@@ -12,12 +12,16 @@ public interface LectureService {
     //    List<AttachFileDTO> getFile(int id);
 
     LectureDTO getLecture(int id);
+
     int addLecture(LectureDTO lectureDTO);
-    int updateLecture(LectureDTO lectureDTO);
-    int deleteLecture(int id);
-    int addFile(AttachFileDTO fileDTO);
+
     int addLectureID(String class_id,String uuid);
 
-    // AttachFileDTO의 경우 만들지 않고 일단 냅두었어.
+    int updateLecture(LectureDTO lectureDTO);
+
+    int deleteLecture(int id);
+
+    int addFile(AttachFileDTO fileDTO);
+
     List<LectureUnitDTO> getLectureUnit(int id);
 }

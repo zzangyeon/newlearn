@@ -1,7 +1,7 @@
 package com.team.NewLearn.security.handler;
 
 import com.team.NewLearn.dto.member.MemberDTO;
-import com.team.NewLearn.service.login.SecurityService;
+import com.team.NewLearn.security.login.SecurityService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ public class AuthProvider implements AuthenticationProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthSuccessHandler.class);
 
-    private final SecurityService securityServiceMapper;
+    private final SecurityService securityService;
 
     //로그인 버튼을 누를 경우
     //실행 1
@@ -38,6 +38,7 @@ public class AuthProvider implements AuthenticationProvider {
 
         return authenticate(email, password);
     }
+
     //실행 2
     private Authentication authenticate (String email, String password) throws  AuthenticationException {
 
@@ -46,7 +47,7 @@ public class AuthProvider implements AuthenticationProvider {
 
         MemberDTO member = new MemberDTO();
 
-        member = (MemberDTO) securityServiceMapper.loadUserByUsername(email);
+        member = (MemberDTO) securityService.loadUserByUsername(email);
 
 
         if (member == null) {
@@ -64,7 +65,6 @@ public class AuthProvider implements AuthenticationProvider {
 
 
         return new MyAuthentication(email, password, grantedAuthorities, member);
-
     }
 
     @Override

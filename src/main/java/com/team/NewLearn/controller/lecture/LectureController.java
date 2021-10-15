@@ -30,12 +30,14 @@ public class LectureController {
 
     private final LectureService lectureService;
 
+    //강의 리스트
     @RequestMapping("/lecturelist")
     public String goToList(Model model){
         model.addAttribute("lectureDTOs", lectureService.getLectureList());
         return "lecture/list";
     }
 
+    //강의 상세 페이지
     @GetMapping("/detail/{id}")
     public String goToDetail(Model model,@PathVariable("id") int id){
         model.addAttribute("lectureDTO", lectureService.getLecture(id));
@@ -43,14 +45,15 @@ public class LectureController {
         return "lecture/detail";
     }
 
+    //강의 등록 페이지로 이동
     @GetMapping("/goToAdd")
     public String gotoAdd(LectureDTO lectureDTO){
         return "lecture/add";
     }
 
+    //강의 등록
     @PostMapping("/add")
     public String addClass(LectureDTO lectureDTO,String uuid){
-        System.out.println(":::UUID"+uuid);
         lectureService.addLecture(lectureDTO);
         lectureService.addLectureID(String.valueOf(lectureDTO.getId()),uuid);
         return "redirect:/detail/"+ lectureDTO.getId();

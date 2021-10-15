@@ -16,13 +16,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *  관리자 모드
+ *  1) 회원 조회 및 삭제
+ *  2) 강의 조회 및 삭제
+ *  3) 커뮤니티 조회 및 삭제
+ */
+
 @Log4j2
 @Controller
 @RequiredArgsConstructor
 public class AdminController {
 
     private final MemberService memberService;
-
 
     // [회원] 전체 회원 조회
     @GetMapping("/admin/member")
@@ -54,7 +60,6 @@ public class AdminController {
         return "redirect:/admin/member";
     }
 
-    /////////////////////////////강의 시작//////////////////////////
     // [강의] 전체 강의 조회
     @GetMapping("/admin/lecture")
     public String selectAllLecture(Criteria cri, Model model, Authentication auth) {
@@ -85,9 +90,6 @@ public class AdminController {
         }
         return "redirect:/admin/lecture";
     }
-    /////////////////////////////강의 끝 //////////////////////////
-
-    /////////////////////////////커뮤니티 시작 //////////////////////////
 
     // [커뮤니티] 전체 회원 조회
     @GetMapping("/admin/community")
@@ -123,8 +125,5 @@ public class AdminController {
         }
         return "redirect:/admin/community";
     }
-
-    /////////////////////////////커뮤니티 끝 //////////////////////////
-
 
 }

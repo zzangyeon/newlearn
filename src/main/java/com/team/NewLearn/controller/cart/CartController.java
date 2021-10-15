@@ -8,11 +8,20 @@ import com.team.NewLearn.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
+
+/**
+ *  1) 장바구니 리스트
+ *  2) 장바구니 추가 및 삭제
+ *  3) 장바구니 쿠폰 조회 및 적용
+ */
+
 @Log4j2
 @Controller
 @RequestMapping("/cart")
@@ -39,6 +48,7 @@ public class CartController {
         return "/cart/cart";
     }
 
+    //장바구니 삭제
     @ResponseBody
     @PostMapping("/delete")
     public int deleteCart(@RequestParam int cartId, CartDTO cartDTO){
@@ -76,7 +86,7 @@ public class CartController {
         System.out.println(cartDTO);
         return cartService.countLecture(cartDTO);
     }
-
+    // 장바구니 추가
     @ResponseBody
     @PostMapping("/insert")
     public int insertLecture(@ModelAttribute CartDTO cartDTO){

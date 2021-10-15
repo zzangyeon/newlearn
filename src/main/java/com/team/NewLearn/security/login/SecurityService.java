@@ -1,4 +1,4 @@
-package com.team.NewLearn.service.login;
+package com.team.NewLearn.security.login;
 
 import com.team.NewLearn.dto.login.LoginLogDTO;
 import com.team.NewLearn.dto.member.MemberDTO;

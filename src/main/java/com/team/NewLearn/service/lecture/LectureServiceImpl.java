@@ -16,7 +16,7 @@ public class LectureServiceImpl implements LectureService{
 
     private final LectureMapper lectureMapper;
 
-    // 강의 페이지에서 Lecture list를 가져옴.
+    // Lecture list를 가져옴.
     @Override
     public List<LectureDTO> getLectureList() {
         return lectureMapper.getLectureList();

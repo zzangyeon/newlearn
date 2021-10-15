@@ -2,12 +2,11 @@ package com.team.NewLearn.security.config;
 
 import com.team.NewLearn.security.handler.AuthFailureHandler;
 import com.team.NewLearn.security.handler.AuthSuccessHandler;
-import com.team.NewLearn.service.login.SecurityServiceImpl;
+import com.team.NewLearn.security.login.SecurityServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -40,34 +39,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").access("hasRole('ROLE_USER')")
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/mypage/**").access("hasRole('ROLE_USER')or hasRole('ROLE_ADMIN')")
-                .antMatchers("/main",
-                        "/login",
+                .antMatchers("/",
                         "/sign-Up",
-                        "/pwFind",
                         "/login/**",
                         "/reply/**",
                         "/community/**",
-                        "/main",
-                        "/pwFind",
                         "/css/**","/js/**","/img/**","/plugin/**","/vendor/**",
                         "/logout"
-
                 ).permitAll()
-                .antMatchers("/**").authenticated();
+                .antMatchers("/cart/**","/mypage/**","/pwFind").authenticated();
 
         http.formLogin()
                 // 로그인 후 보여줄 페이지
                 .loginPage("/login")
-                // 로그인 버튼 눌릴 시 진행될 프로세스 연결
+                // 로그인 버튼 클릭시 진행될 프로세스 연결
                 .loginProcessingUrl("/login-process")
                 .usernameParameter("email")    //input name 파라미터로 "email"를 받는다.
                 .passwordParameter("password") //input name 파라미터로 "password"를 받는다.
                 .failureHandler(authFailureHandler) //로그인 실패시 수행하는 클래스
-                .successHandler(authSuccessHandler);// 로그인 성공시 수행하는 클래스
+                .successHandler(authSuccessHandler)// 로그인 성공시 수행하는 클래스
+                .defaultSuccessUrl("/");
 
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login")  // 이 경로로 리다이렉트 하고
+                .logoutSuccessUrl("/")  // 이 경로로 리다이렉트 하고
                 .invalidateHttpSession(true);   // 세션 초기화
 
     }

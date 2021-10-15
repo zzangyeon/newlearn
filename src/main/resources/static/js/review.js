@@ -1,3 +1,4 @@
+
 var lectureId = $('#lectureId').val(); //강의 번호
 
 $('[name=reviewInsertBtn]').click(function(){
@@ -18,11 +19,11 @@ function reviewList(){
             var a ='';
             $.each(data, function(key, value){
                 a += '<div class="reviewArea">';
-                a +=    '<div class="reviewInfo'+value.id+'">'+'작성자 : '+value.email;
+                a +=    '<div class="reviewInfo">'+'작성자 : '+value.email;
                 /*a +=        '<a onclick="reviewUpdate('+value.id+',\''+value.content+'\');"> 수정 </a>';
                 a +=        '<a onclick="reviewDelete('+value.id+');"> 삭제 </a>';*/
                 a +=    '</div>';
-                a +=    '<div class="reviewContent'+value.id+'">';
+                a +=    '<div class="reviewContent">';
                 a +=        '<textarea class="reviewText" disabled>'+value.content +'</textarea>';
                 a +=        '<span class="reviewRegdate">'+value.regDate+'</span>';
                 a +=    '</div>';
@@ -33,6 +34,7 @@ function reviewList(){
         }
     });
 }
+
 <!--수강평 등록-->
 function reviewInsert(insertData){
     $.ajax({
@@ -48,6 +50,7 @@ function reviewInsert(insertData){
         }
     });
 }
+
 /*수강평 수정 - 수강평 내용 출력을 input 폼으로 변경*/
 function reviewUpdate(id, content){
     var a ='';
@@ -67,7 +70,7 @@ function reviewUpdateProc(id){
 
     $.ajax({
         url : '/review/update',
-        type : 'post',
+        type : 'put',
         data : {'content' : content, 'id' : id},
         success : function(data){
             if(data == 1) reviewList(); //댓글 수정후 목록 출력
@@ -79,7 +82,7 @@ function reviewUpdateProc(id){
 function reviewDelete(id){
     $.ajax({
         url : '/review/delete/',
-        type : 'post',
+        type : 'delete',
         data : {'id' : id},
         success : function(data){
             if(data == 1) reviewList(id); //댓글 삭제후 목록 출력

@@ -14,13 +14,11 @@ public class MailController {
 
     @GetMapping("/pwFind")
     public String dispMail() {
-
         return "login/pwFind";
     }
 
     @PostMapping("/pwFind")
     public String execMail(MemberDTO memberDTO) {
-
         mailService.checkId(memberDTO);
         return "redirect:/main";
     }

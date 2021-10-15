@@ -2,7 +2,7 @@ package com.team.NewLearn.security.handler;
 
 import com.team.NewLearn.dto.login.LoginLogDTO;
 import com.team.NewLearn.dto.member.MemberDTO;
-import com.team.NewLearn.service.login.SecurityService;
+import com.team.NewLearn.security.login.SecurityService;
 import com.team.NewLearn.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

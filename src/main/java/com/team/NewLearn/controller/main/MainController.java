@@ -20,11 +20,9 @@ public class MainController {
 
     private final MemberService memberService;
 
-    @GetMapping("/main")
+    @GetMapping("/")
     public String selectAllMember(Model model, Authentication auth) {
-
         log.info("main 페이지 컨트롤러");
-
         if (auth != null) {
 
             model.addAttribute("result", memberService.selectMember(auth.getName()));

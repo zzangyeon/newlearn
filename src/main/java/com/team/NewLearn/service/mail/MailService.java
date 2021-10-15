@@ -3,7 +3,7 @@ package com.team.NewLearn.service.mail;
 
 import com.team.NewLearn.dto.member.MemberDTO;
 import com.team.NewLearn.mapper.member.MemberMapper;
-import com.team.NewLearn.service.login.SecurityService;
+import com.team.NewLearn.security.login.SecurityService;
 import com.team.NewLearn.util.MailHandler;
 import com.team.NewLearn.util.TempPw;
 import lombok.RequiredArgsConstructor;
@@ -33,10 +33,9 @@ public class MailService {
             log.info("id가 존재하지 않습니다.");
 
         }else{
-            log.info("::::::: 해당 id 임시 비밀번호 발급 ㄱㄱ ::::::::::");
-
             mailSend(memberDTO);
             securityServiceMapper.resetPasswordFailCnt(memberDTO.getEmail());
+            log.info("::::::: 해당 id 임시 비밀번호 발급하였습니다. ::::::::::");
         }
 
     }

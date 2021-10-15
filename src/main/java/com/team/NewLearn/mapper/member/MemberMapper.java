@@ -10,7 +10,6 @@ import java.util.Map;
 @Mapper
 public interface MemberMapper {
 
-
     // 관리자 : 회원 전체 조회
     List<MemberDTO> selectAllMember(Criteria cri);
 

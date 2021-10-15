@@ -1,4 +1,4 @@
-package com.team.NewLearn.service.login;
+package com.team.NewLearn.security.login;
 
 import com.team.NewLearn.dto.login.LoginLogDTO;
 import com.team.NewLearn.dto.member.MemberDTO;
@@ -31,7 +31,6 @@ public class SecurityServiceImpl implements SecurityService {
     public List<MemberDTO> selectAllMember(Criteria cri) {
         log.info("여기는 select all member 서비스 단!!!! ");
         return boardMemberMapper.selectAllMember(cri);
-
     }
 
     @Override
@@ -43,7 +42,6 @@ public class SecurityServiceImpl implements SecurityService {
     @Override
     public int checkPassLock(String email) throws DisabledException {
         log.info("비밀번호 틀린 횟수 조회 중");
-
         return loginMapper.checkPassLock(email);
     }
 
@@ -58,24 +56,19 @@ public class SecurityServiceImpl implements SecurityService {
         if (member != null) {
             authorities.add(new SimpleGrantedAuthority(member.getRole()));
             member.setAuthorities(authorities);
-
         }
         System.out.println("member = " + member);
         System.out.println("authorities = " + authorities);
         return member;
     }
 
-
     @Override
     public int memberSignUp(MemberDTO memberDTO) throws Exception {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         memberDTO.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
         log.info(":::::::::::회원가입 서비스 단 ::::::::::::::::::");
-
         return loginMapper.memberSignUp(memberDTO);
     }
-
-
 
     @Override
     public MemberDTO selectMemberInfo(String email) {

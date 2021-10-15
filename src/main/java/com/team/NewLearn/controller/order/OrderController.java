@@ -39,5 +39,6 @@ public class OrderController {
         orderService.insertOrder(orderDTO);
         cartService.deleteCartAll(memberId);
         return "redirect:/main";
+
     }
 }

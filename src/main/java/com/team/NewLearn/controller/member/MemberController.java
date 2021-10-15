@@ -62,7 +62,7 @@ public class MemberController {
         return "member/memberUpdate";
     }
 
-    // 회원 정보 수정 완료
+    // 회원 정보 수정
     @PostMapping("/update")
     public String updateMember(@ModelAttribute MemberDTO memberDTO) {
 
