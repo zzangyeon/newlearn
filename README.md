@@ -1,7 +1,3 @@
-# newlearn
-[팀 프로젝트] NewLearn : 강의 홈페이지 제작
-
-
 # 1. 개요 및 주제
 
 뉴런은 **온라인 교육 사이트** '인프런' 을 참고해 진행한 프로젝트입니다.
@@ -50,38 +46,6 @@
 - 회원 관리 시스템
     - 전체 회원 조회 , 검색, 삭제
     [ ROLE_ADMIN ] 권한을 가지고 있는 member는 회원 관리 시스템에 접근이 가능하다.
-    
-    ```java
-    
-    < 전체 회원 조회 >
-    @GetMapping("/admin/members")
-    public String selectAllMember(Criteria cri, Model model, Authentication auth) {
-        log.info(" ::::[관리자] 전체회원 조회 controller:::::::::::: ");
-    
-        List<MemberDTO> memberDTOS = new ArrayList<>();
-        memberDTOS = memberService.selectAllMember(cri);
-    
-        model.addAttribute("auth", auth);
-        model.addAttribute("result", memberDTOS);
-        model.addAttribute("pageMaker", new PageDTO(cri, memberService.getTotal()));
-    
-        return "admin/adminMember";
-    }
-    
-    < 체크된 회원 삭제 >
-    @DeleteMapping("/admin/member")
-    public String deleteMember(@RequestParam("delete") List<String> ids){
-        log.info(" ::::[관리자] 선택 회원 삭제 controller::::::::::: ");
-    
-        if (ids != null) {
-            for(String idStr : ids){
-                int id = Integer.parseInt(idStr);
-                memberService.memberDelete(id);
-            }
-        }
-        return "redirect:/admin/member";
-    }
-    ```
     
     ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/54d9e4f5-7ee1-42ca-9692-6e6355b159af/Untitled.png)
     
@@ -137,6 +101,7 @@
 
 - 이메일로 임시 비밀번호 전송
     
+    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/00d51f58-0ccb-4b35-af04-3ff6d668b2d0/Untitled.png)
     
 
 ### 🛒 장바구니
@@ -172,73 +137,3 @@
 ### 🔍 마이페이지
 
 - 이름 및 비밀번호 변경
-    
-    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/dba49b0a-6d12-40f6-8f04-b76b0bb039b4/Untitled.png)
-    
-
----
-
-# 5. 리팩토링 및 기능 보완
-
-## 1) REST API 설계
-
-- 문제점 및 이유 / 리팩토링 결과
-    
-    
-    ### 🚩 문제점
-    
-    **API 아키텍처 디자인에 대한 고려 없이** 일단 기능이 돌아가도록 만들었다.
-    한마디로 API **설계 보다는 기능이 수행되도록** 코드를 먼저 작성하였던 것이다.
-    하지만 프로젝트 완성 후, 각자가 설계한 API는 **통일감이 없었고 RESTful API와는 완전히 거리가 멀었다.**
-    
-    ### 💡REST API 설계 이유 ****
-    
-    API는 시스템 전체의 구성, 동작, 환경에 대한 **직관적 이해**를 돕는 설계도라고 할 수 있다.
-    리팩토링 전 API는 통일감 없는 구성과 이해하기 힘든 구조였다.
-    그래서 아래 **REST API 기본 규칙**에 따라 **리팩토링**하였다.
-    
-    (1) URL은 정보의 자원을 표현해야 한다.
-    
-    (2) 자원은 동사보다는 명사를, 대문자보다는 소문자를 사용한다. 
-    
-    (3) 자원에 대한 행위는 HTTP Method로 표현한다.
-    
-    (4) 여러 요소들로 이루어진 자원은 복수로 표현한다.
-    
-    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/345f62f6-a961-4c6a-bd62-c5ca763ca867/Untitled.png)
-    
-    ---
-    
-
----
-
-# 6. 핵심 트러블슈팅
-
-1. aws - s3
-2. 스프링 시큐리티 현재 접속 회원 받아오기
-3. ERD 설계를 할 때 많은 어려움을 겪었고,
-협업에서의 트러블슈팅!
-
----
-
-# 7. 그 외 트러블슈팅
-
-1. 코드 구현 후 다시보니  못알아보겠다 > 클린코드, 리팩토링에 중요성
-2. 사소한 오타 문제, 원인모를문제 >> 에러, 로그 읽는법, 디버깅 중요성
-3. 협업간에  개발 시 코드  표준화 ,  테스트 코드의 중요성
-4. 라이브러리 버전 호환 문제 발생?
-
----
-
-# 8. 회고 및 성장
-
-처음으로 진행한 프로젝트라 나에겐 아주 의미 있는 프로젝트였다.
-공부와 실전은 다르다는 것을 절실히 체감했다.
-SpringBoot, gradle 등 조금은 낯선 환경이였다. 
-그래서인지 처음엔 DB연결에서부터 오류가 발생했고, 단순CRUD도 겨우겨우 해냈다.
-이후 **장바구니 기능**을 개발하며 crud가 조금씩 익숙해졌고
-**결제 기능**을 개발하며 외부 api 사용 성공에 굉장히 뿌듯했다. 실제로 결제가 됐을 땐 신기하고 감동적이였다.
-그리고 **쿠폰 기능**은 어떤 로직으로 개발해야 할지 혼자 고민해보고 구현한 것이 내 생각대로 동작 되는 그 순간 정말 희열을 느꼈다. 물론 아주 간단한 로직이였지만 ...샬라샬라
-**댓글 기능** 개발시에는 api통신 서버 구축................................
-
-각 기능을 개발해나가며 어떻게 개발할지에 대한 막연함이 사라졌다.
